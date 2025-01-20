@@ -6,6 +6,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- ajax -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -17,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="#!">131 SHOP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -34,12 +36,44 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
+                        <a href="{{route('item-carts.carts')}}" class="btn btn-outline-dark">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_item">0</span>
+                        </a>
                     </form>
+                    @guest
+                    <a href="/login" class="btn mx-3">Login</a>
+                    <a href="/register" class="btn btn-dark">Register</a>
+                    @else
+                        <div class="dropdown mx-3">
+                            <a href="#" class="text-decoration-none text-dark dropdown-toggle" data-bs-toggle="dropdown">
+                                {{Auth::user()->name}}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if(Auth::user()->role == 'User')
+                                <li>
+                                    <a href="" class="dropdown-item">Profile</a>
+                                </li>
+                                @else
+                                <li>
+                                    <a href="" class="dropdown-item">Admin Pannel</a>
+                                </li>
+                                @endif
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
         </nav>
@@ -48,9 +82,15 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
         </footer>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{asset('front-assets/js/scripts.js')}}"></script>
+        <!-- Add to Cart -->
+         <script src="{{asset('front-assets/js/add_to_cart.js')}}"></script>
+
+         @yield('script')
     </body>
 </html>

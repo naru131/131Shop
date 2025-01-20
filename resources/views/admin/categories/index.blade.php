@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
                         <div class="my-3">
                             <h1 class="mt-4 d-inline">Category</h1>
-                            <a href="{{route('backend.categores.create')}}" class="btn btn-primary float-end">Create Item</a>
+                            <a href="{{route('backend.categories.create')}}" class="btn btn-primary float-end">Create Category</a>
                         </div>
                         
                         <ol class="breadcrumb mb-4">
@@ -39,11 +39,11 @@
                                     @php
                                     $i = 1;
                                     @endphp
-                                    @foreach($categories as $cateory)
+                                    @foreach($categories as $category)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$cateory->name}}</td>
-                                            <td>{{$cateory->image}}</td>
+                                            <td>{{$category->name}}</td>
+                                            <td>{{$category->image}}</td>
                                             <td>
                                                 <a href="" class="btn btn-sm btn-warning">Edit</a>
                                                 <a href="" class="btn btn-sm btn-danger">Delete</a>

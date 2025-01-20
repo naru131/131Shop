@@ -52,6 +52,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Items
                             </a>
+                            <a class="nav-link" href="{{route('backend.categories.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Categories
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
